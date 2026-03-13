@@ -28,7 +28,8 @@ function Logo({ src, alt }: { src: string; alt: string }) {
   return <img src={src} alt={alt} width={48} height={48} decoding="async" className="w-full h-full object-contain" />
 }
 
-type EditState = { section: 'education'; index: number | 'new' } | { section: 'experience'; index: number | 'new' } | { section: 'projects'; index: number | 'new' } | null
+type EditSection = 'education' | 'experience' | 'projects'
+type EditState = { section: EditSection; index: number | 'new' } | null
 
 const emptyEducation: EducationItem = { school: '', degree: '', period: '', grade: '', skills: [], logo: '' }
 const emptyExperience: ExperienceItem = { company: '', role: '', employmentType: 'Internship', period: '', duration: '', location: '', workArrangement: '', description: '', skills: [], logo: '' }
@@ -68,8 +69,8 @@ export function EditablePortfolio({ initialEducation, initialExperience, initial
   useEffect(() => { save(SK.projects, projects) }, [projects])
   useEffect(() => { if (!canEdit) setEdit(null) }, [canEdit])
 
-  const add = (section: EditState['section']) => setEdit({ section, index: 'new' })
-  const startEdit = (section: EditState['section'], index: number) => setEdit({ section, index })
+  const add = (section: EditSection) => setEdit({ section, index: 'new' })
+  const startEdit = (section: EditSection, index: number) => setEdit({ section, index })
   const cancelEdit = () => setEdit(null)
 
   const saveEducation = (item: EducationItem) => {
