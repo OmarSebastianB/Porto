@@ -69,8 +69,8 @@ export function EditablePortfolio({ initialEducation, initialExperience, initial
   useEffect(() => { save(SK.projects, projects) }, [projects])
   useEffect(() => { if (!canEdit) setEdit(null) }, [canEdit])
 
-  const add = (section: EditSection) => setEdit({ section, index: 'new' })
-  const startEdit = (section: EditSection, index: number) => setEdit({ section, index })
+  const add = (section: 'education' | 'experience' | 'projects') => setEdit({ section, index: 'new' })
+  const startEdit = (section: 'education' | 'experience' | 'projects', index: number) => setEdit({ section, index })
   const cancelEdit = () => setEdit(null)
 
   const saveEducation = (item: EducationItem) => {
